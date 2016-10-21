@@ -63,11 +63,10 @@ public class CountdownButton extends Button implements View.OnClickListener {
      * 初始化操作
      */
     private void initView() {
-        if(TextUtils.isEmpty(getText())){
-            this.setText(beforeText);
-        }else{
-            this.setText(getText());
+        if (!TextUtils.isEmpty(getText())) {
+            beforeText = getText().toString().trim();
         }
+        this.setText(beforeText);
         setOnClickListener(this);
     }
 
@@ -160,8 +159,9 @@ public class CountdownButton extends Button implements View.OnClickListener {
             length -= 1000;
             if (length < 0) {
                 CountdownButton.this.setEnabled(true);
-                CountdownButton.this.setText(getText());
+                CountdownButton.this.setText(beforeText);
                 clearTimer();
+                length = 60 * 1000;
             }
         }
     };
