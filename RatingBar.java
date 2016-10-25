@@ -58,7 +58,7 @@ public class RatingBar extends LinearLayout {
     /**
      * 每次点击星星所增加的量是整个还是半个
      */
-    private  StepSize stepSize;
+    private StepSize stepSize;
 
     /**
      * 设置半星的图片资源文件
@@ -245,10 +245,31 @@ public class RatingBar extends LinearLayout {
         /**
          * 选中的星星的个数
          *
-         * @param RatingCount
+         * @param ratingCount
          */
-        void onRatingChange(float RatingCount);
+        void onRatingChange(float ratingCount);
 
     }
 
+    /**
+     * 星星每次增加的方式整星还是半星，枚举类型
+     * 类似于View.GONE
+     */
+    public enum StepSize {
+        Half(0), Full(1);
+        int step;
+
+        StepSize(int step) {
+            this.step = step;
+        }
+
+        public static StepSize fromStep(int step) {
+            for (StepSize f : values()) {
+                if (f.step == step) {
+                    return f;
+                }
+            }
+            throw new IllegalArgumentException();
+        }
+    }
 }
